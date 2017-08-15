@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:h="http://xmlns.jcp.org/jsf/html"
+xmlns:p="http://primefaces.org/ui"
+xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+	<h:head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+		<title>Cadastro de estados</title>
+	</h:head>
+
+<h:body>
+
+	<h:form>
+	    <p:panel header="Estados - listagem">
+	    	<p:dataTable emptyMessage="Sem registros" pagination="yes">
+	    		<f:facet name="header">
+	    			<p:commandButton value="Novo" oncomplete="PF('dlg').show();"></p:commandButton>
+	    		</f:facet>
+	    		<p:column headerText="Nome"></p:column>
+	    		<p:column headerText="Sigla"></p:column>
+	    		<p:column headerText="Opções"></p:column>
+	    	</p:dataTable>
+	    </p:panel>
+	</h:form>
+	
+	<p:dialog header="Estados - Cadastro" widgetVar="dlg" resizable="yes" draggable="false" modal="true" closable="false">
+		<h:form>
+			<h:panelGrid columns="2">
+				<p:outputLabel value="Nome:"/>
+				<p:inputText maxlenght="20" size="30"/>
+				<p:outputLabel value="Sigla:"/>
+				<p:inputText maxlenght="2" size="10"/>
+			</h:panelGrid>
+			
+			<h:panelGrid columns="2">
+				<p:commandButton value="Salvar"/>
+				<p:commandButton value="Fechar" oncomplete="PF('dlg').hide();"/>
+			</h:panelGrid>
+		</h:form>
+	</p:dialog>
+	
+	
+</h:body>
+
+</html>
