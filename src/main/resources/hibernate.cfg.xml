@@ -10,8 +10,8 @@
 		<!-- Configurações de Conexão com o Banco de Dados -->
 		<property name="connection.driver_class">com.mysql.jdbc.Driver</property>
 		<property name="connection.url">jdbc:mysql://oregionalsul.com/programacao_web</property>
-		<property name="connection.username">tecint</property>
-		<property name="connection.password">xsvfnh1702</property>
+		<property name="connection.username">pweb</property>
+		<property name="connection.password">pweb</property>
 
 		<!-- Pool de Conexões -->
 		<property name="connection.pool_size">1</property>
