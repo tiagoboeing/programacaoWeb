@@ -13,16 +13,30 @@ xmlns:f="http://xmlns.jcp.org/jsf/core">
 
 <h:body>
 
-	<h:form>
+	<p:growl id="msg"/>
+
+	<h:form id="formTabela">
 	    <p:panel header="Estados - listagem">
-	    	<p:dataTable emptyMessage="Sem registros" pagination="yes">
+	    	
+	    	<p:dataTable emptyMessage="Sem registros" pagination="yes" paginator="true" value="#{estadoBack.listaEstados}" var="estado" rows="4" paginatorPosition="bottom">
+	    		
 	    		<f:facet name="header">
 	    			<p:commandButton value="Novo" oncomplete="PF('dlg').show();"></p:commandButton>
 	    		</f:facet>
-	    		<p:column headerText="Nome"></p:column>
-	    		<p:column headerText="Sigla"></p:column>
-	    		<p:column headerText="Opções"></p:column>
+	    		
+	    		<p:column headerText="Nome" sortBy="#{estado.nomeEstado}" filterBy="#{estado.nomeEstado}">
+	    			<h:outputText value="#{estado.nomeEstado}" />
+	    		</p:column>
+	    		
+	    		<p:column headerText="Sigla" sortBy="#{estado.ufEstado}" filterBy="#{estado.ufEstado}">
+	    			<h:outputText value="#{estado.ufEstado}" />
+	    		</p:column>
+	    		
+	    		<p:column headerText="Opções">
+	    		</p:column>
+	    		
 	    	</p:dataTable>
+	    	
 	    </p:panel>
 	</h:form>
 	
@@ -30,15 +44,18 @@ xmlns:f="http://xmlns.jcp.org/jsf/core">
 		
 		<h:form id="formCadastro">
 		
-			<h:panelGrid columns="2">
-				<p:outputLabel value="Nome:"/>
-				<p:inputText maxlenght="20" size="30" value="#{estadoBack.estado.nomeEstado}"/>
-				<p:outputLabel value="Sigla:"/>
-				<p:inputText maxlenght="2" size="10" value="#{estadoBack.estado.ufEstado}"/>
+			<h:panelGrid columns="2" id="pnlCad">
+			
+				<p:outputLabel value="Nome:" for="txtNome"/>
+				<p:inputText id="txtNome" maxlenght="20" size="30" value="#{estadoBack.estado.nomeEstado}" required="true" requiredMessage="Nome obrigatório!"/>
+				
+				<p:outputLabel value="Sigla:" for="txtSigla"/>
+				<p:inputText id="txtSigla" maxlenght="2" size="10" value="#{estadoBack.estado.ufEstado}" required="true" requiredMessage="Sigla obrigatória!"/>
+			
 			</h:panelGrid>
 			
 			<h:panelGrid columns="2">
-				<p:commandButton value="Salvar" actionListener="#{estadoBack.cadastraEstado()}"/>
+				<p:commandButton value="Salvar" actionListener="#{estadoBack.cadastraEstado()}" update="formCadastro:pnlCad msg formTabela"/>
 				<p:commandButton value="Fechar" oncomplete="PF('dlg').hide();"/>
 			</h:panelGrid>
 			

@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
+import org.omnifaces.util.Messages;
+
 import br.unisul.exemplo.domain.Estado;
 
 @SuppressWarnings("serial")
@@ -19,7 +21,8 @@ public class EstadoBack implements Serializable{
 	
 	public void cadastraEstado(){
 		
-		System.out.println(estado.getNomeEstado() + "-" + estado.getUfEstado());
+		//System.out.println(estado.getNomeEstado() + "-" + estado.getUfEstado());
+		Messages.addGlobalInfo(estado.getNomeEstado() + "-" + estado.getUfEstado());
 		listaEstados.add(estado);
 		estado = new Estado();
 		
