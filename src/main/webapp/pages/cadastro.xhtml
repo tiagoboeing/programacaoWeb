@@ -9,16 +9,22 @@ xmlns:f="http://xmlns.jcp.org/jsf/core">
 	<h:head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 		<title>Cadastro de estados</title>
+		
+		<h:link href="estilo.css" rel="Stylesheet" type="text/css"/>
+		
 	</h:head>
 
 <h:body>
 
 	<p:growl id="msg"/>
 
+
+
+
 	<h:form id="formTabela">
 	    <p:panel header="Estados - listagem">
 	    	
-	    	<p:dataTable emptyMessage="Sem registros" pagination="yes" paginator="true" value="#{estadoBack.listaEstados}" var="estado" rows="4" paginatorPosition="bottom">
+	    	<p:dataTable emptyMessage="Sem registros" id="tbl" var="estado" pagination="yes" paginator="true" value="#{estadoBack.listaEstados}" rows="4" paginatorPosition="bottom">
 	    		
 	    		<f:facet name="header">
 	    			<p:commandButton value="Novo" oncomplete="PF('dlg').show();"></p:commandButton>
@@ -33,12 +39,29 @@ xmlns:f="http://xmlns.jcp.org/jsf/core">
 	    		</p:column>
 	    		
 	    		<p:column headerText="Opções">
-	    		</p:column>
+					<p:commandButton icon="ui-icon-trash" actionListener="#{estadoBack.excluiEstado}" update="formTabela:tbl msg">
+						<p:confirm header="Confirmação" message="Excluir UF?" icon="ui-icon-alert" />
+						<f:attribute name="ufExcluir" value="#{estado}"/>
+					</p:commandButton>
+					
+					<p:commandButton icon="ui-icon-pencil" oncomplete="PF('dlg').show();" update="formCadastro:pnlCad" actionListener="#{estadoBack.editaEstado}">
+						<f:attribute name="ufAlterar" value="#{estado}"/>
+					</p:commandButton>
+				</p:column>
 	    		
 	    	</p:dataTable>
 	    	
+	    	<p:confirmDialog showEffect="fade" global="true" hideEffect="fade">
+	    		<p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+	        	<p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+	    	</p:confirmDialog>
+	    	
 	    </p:panel>
 	</h:form>
+	
+	
+	
+	
 	
 	<p:dialog header="Estados - Cadastro" widgetVar="dlg" resizable="yes" draggable="false" modal="true" closable="false">
 		
@@ -48,14 +71,16 @@ xmlns:f="http://xmlns.jcp.org/jsf/core">
 			
 				<p:outputLabel value="Nome:" for="txtNome"/>
 				<p:inputText id="txtNome" maxlenght="20" size="30" value="#{estadoBack.estado.nomeEstado}" required="true" requiredMessage="Nome obrigatório!"/>
-				
+
 				<p:outputLabel value="Sigla:" for="txtSigla"/>
-				<p:inputText id="txtSigla" maxlenght="2" size="10" value="#{estadoBack.estado.ufEstado}" required="true" requiredMessage="Sigla obrigatória!"/>
+				<p:inputText id="txtSigla" maxlenght="2" size="10" value="#{estadoBack.estado.ufEstado}" required="true" requiredMessage="Sigla obrigatória!" validatorMessage="Sigla deve ter 2 caracteres">
+					<f:validateLength minimum="2" maximum="2"/>
+				</p:inputText>
 			
 			</h:panelGrid>
 			
 			<h:panelGrid columns="2">
-				<p:commandButton value="Salvar" actionListener="#{estadoBack.cadastraEstado()}" update="formCadastro:pnlCad msg formTabela"/>
+				<p:commandButton value="Salvar" actionListener="#{estadoBack.cadastraEstado()}" update="formCadastro:pnlCad msg formTabela:tbl"/>
 				<p:commandButton value="Fechar" oncomplete="PF('dlg').hide();"/>
 			</h:panelGrid>
 			

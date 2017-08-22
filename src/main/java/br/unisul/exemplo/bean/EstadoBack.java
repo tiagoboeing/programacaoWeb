@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.event.ActionEvent;
 
 import org.omnifaces.util.Messages;
 
@@ -17,6 +18,18 @@ public class EstadoBack implements Serializable{
 
 	private Estado estado = new Estado();
 	private ArrayList<Estado> listaEstados = new ArrayList<Estado>();
+	
+	
+	public void editaEstado(ActionEvent evt){
+		estado = (Estado) evt.getComponent().getAttributes().get("ufAlterar");
+	}
+	
+	
+	public void excluiEstado(ActionEvent evt){ 
+		estado = (Estado) evt.getComponent().getAttributes().get("ufExcluir");
+		
+		Messages.addGlobalInfo(estado.getNomeEstado() + "-" + estado.getUfEstado());
+	}
 	
 	
 	public void cadastraEstado(){
