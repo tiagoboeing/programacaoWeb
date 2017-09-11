@@ -30,6 +30,7 @@
 	</build>
 	
 	<dependencies>
+	
 		<!-- Hibernate -->
 		<dependency>
 		    <groupId>org.hibernate</groupId>
@@ -51,6 +52,12 @@
 		    <version>9.4.1212</version>
 		</dependency> !-->
 		
+		<!-- MUDA TEMA DO PRIMEFACES -->
+		<dependency>
+			<groupId>org.primefaces.themes</groupId>
+			<artifactId>delta</artifactId>
+			<version>1.0.10</version>
+		</dependency>
 		
 		<dependency>
 			<groupId>mysql</groupId>
@@ -80,4 +87,17 @@
 			<scope>provided</scope>
 		</dependency>
 	</dependencies>
+	
+	
+	
+	<repositories>
+        <repository>
+            <id>prime-repo</id>
+            <name>PrimeFaces Maven Repository</name>
+            <url>http://repository.primefaces.org</url>
+            <layout>default</layout>
+        </repository>
+    </repositories>
+	
+	
 </project>
